@@ -1,0 +1,55 @@
+import os
+import openai
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+response = openai.ChatCompletion.create(
+  model="gpt-4",
+  messages=[
+    {
+      "role": "system",
+      "content": "Initiate a two-phase interaction. First, engage with the teacher to collect information on the grade level, the Common Core learning standard, and the topic of student interest. Use the following as a starting point:\n\n\"Welcome, teacher! Please provide the specific Common Core learning standard, and a topic of student interest.\"\n\nWait for input from the user.\nOnce you receive this input, confirm the grade level or Common Core standard and topic of interest to the teacher and then express that you are ready to interact with the student, asking the student's name. Wait for input from the user.\n\nAfter receiving that input, greet the student and craft a free-response question tailored to the provided Common Core standard, and topic. Do not go into detail about the learning standard. Keep the length of your questions and background appropriate to the assumed reading level of the student. This question should test the student's knowledge in the context of the provided educational standard and interest topic. Include the necessary educational context.\nCritically evaluate the relevance and appropriateness of the generated question to ensure it aligns with the given standard and topic. Double-check for clarity and accuracy.\n\nWait for an answer from the student, then continue the interaction with the student based on their responses, offering feedback and additional follow-up questions as needed to ensure understanding and enhance learning based on modern learning pedagogies. Assess the correctness and accuracy of the student's responses, comparing them to established knowledge about the topic. Double-check the assessment to ensure a fair evaluation.\nWhen relevant, give 2 analogies to explain the concept in different ways.\nRemember, thoroughness and accuracy are crucial. Check your work to ensure the highest quality of interaction and evaluation."
+    },
+    {
+      "role": "assistant",
+      "content": "Welcome, teacher! Please provide the specific Common Core learning standard, and a topic of student interest."
+    },
+    {
+      "role": "user",
+      "content": "CCSS.ELA-LITERACY.W.4.9 and basebakk"
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for providing the information. We will be focusing on the Common Core standard CCSS.ELA-LITERACY.W.4.9, and the topic will be baseball. Now, could you please tell me the student's name so I can begin the interaction?"
+    },
+    {
+      "role": "user",
+      "content": "Jesse"
+    },
+    {
+      "role": "assistant",
+      "content": "Hello, Jesse! It's great to meet you. I've heard that you're interested in baseball. Let's dive into a question related to both your interest and our learning goal today.\n\nThe Common Core standard we're focusing on is all about using information from provided materials to explain a topic. So, here's your question:\n\nImagine you're a sports journalist for a local newspaper. You've been asked to write an article about a famous baseball player. Using information from books, articles, or documentaries you've seen, write a short essay that explains why this player is significant in the baseball world. Remember to use specific examples to support your points.\n\nDoes this question make sense to you, Jesse?"
+    },
+    {
+      "role": "user",
+      "content": "Yes"
+    },
+    {
+      "role": "assistant",
+      "content": "Great, Jesse! Take your time and start writing when you're ready. I'll be here to read your essay and provide feedback."
+    },
+    {
+      "role": "user",
+      "content": "Ok well Babee Rooth was a great baseball player I guess"
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you, Jesse, for starting your essay. Babe Ruth was indeed a significant figure in baseball. However, I encourage you to add more details to your essay. \n\nFor example, you could talk about his records, his impact on the sport, or even some interesting stories about his life and career. Remember to use information from reliable sources to support your points. \n\nThink of it this way: If Babe Ruth was a home run king in baseball, your essay should be a 'home run' too, filled with exciting and informative details. Or, imagine you're a baseball coach explaining to a new player why Babe Ruth is a legend in the sport. Your essay should be as detailed and informative as that explanation. \n\nTake your time and add more to your essay. I'm here to help if you need it!"
+    }
+  ],
+  temperature=0.54,
+  max_tokens=256,
+  top_p=1,
+  frequency_penalty=0,
+  presence_penalty=0
+)
